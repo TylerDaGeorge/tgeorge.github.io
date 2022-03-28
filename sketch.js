@@ -1,46 +1,78 @@
-let eX;
-let eY;
-let ellipseSize = 13;
-let overEllipse = false;
+let circleX, circleY;
+let circleSize = 13;
+let circleColor;
+let circleOver = false;
+let baseColor;
+
+let circleX1, circleY1;
+let circleOver1 = false;
 
 
 
 function setup() {
-  createCanvas(500, 500);  //do not touch!
+  createCanvas(500, 500);
   strokeWeight(2);
   ellipseMode(RADIUS);
   randomize();
 
-  var ellipse1 = ellipse(100,100,50,50);
-  var ellipse2 = ellipse(300,100,50,50);
-  var ellipse3 = ellipse(100,300,50,50);
-  var ellipse4 = ellipse(300,300,50,50);
 
 
-  eX = width/2;
-  eY = height/2;
+  circleColor = (0);
+  baseColor = (204);
+  circleX = 175;
+  circleY = 270;
+
+  socketColor = (102);
+  whiteColor = (255);
+  irisColor = [r,g,b];
+
+
+
+  circleX1 = 288;
+  circleY1 = 150;
+
+  socketColor1 = (102);
+  whiteColor1 = (255);
+  irisColor1 = [r,g,b];
+
+
 }
 
 function draw() {
+  background(baseColor);
 
-  if (
-      mouseX > eX - ellipseSize &&
-      mouseX < eX + ellipseSize &&
-      mouseY > eY - ellipseSize &&
-      mouseY < eY + ellipseSize
-    ) {
-      overEllipse = true;
-    } else {
-      overEllipse = false;
-    }
+  update(mouseX, mouseY);
 
-    if (overEllipse = true){
-      ellipse(175,270,13,13);
-    }
+  if (circleOver) {
+    socketColor = (0);
+    whiteColor = (0);
+    irisColor = (0);
+  } else {
+    socketColor = (102);
+    whiteColor = (255);
+    irisColor = [r,g,b];
+  }
+
+  if (circleOver1) {
+    socketColor1 = (0);
+    whiteColor1 = (0);
+    irisColor1 = (0);
+  } else {
+    socketColor1 = (102);
+    whiteColor1 = (255);
+    irisColor1 = [r,g,b];
+  }
+
+
+  fill(circleColor);
+  ellipse(circleX, circleY, circleSize);
+  ellipse(circleX1, circleY1, circleSize+2);
 
 
 
-  background(204);
+
+
+
   // Neck
   stroke(102); // Set stroke to gray
   line(266, 257, 266, 162); // Left
@@ -75,25 +107,29 @@ function draw() {
   rect(219, 257, 90, 120); // Main body
   fill(0); // Set fill to black
   ellipse(276, 155, 45, 45); // Head
-  fill(102);
+  fill(socketColor1);
   ellipse(288,150,16,16);
-  fill(255); // Set fill to white
+  fill(whiteColor1); // Set fill to white
   ellipse(288, 150, 14, 14); // Large eye
-  fill(255,0,0);
+  fill(irisColor1);
   ellipse(288,150,7,14);
   fill(0); // Set fill to black
   ellipse(288, 150, 4, 14); // Pupil
   //second eye and neck
   fill(0);
   ellipse(175,270,30,30); // second head
-  fill(102);
+  fill(socketColor);
   ellipse(175,270,13,13) // grey eye socket
-  fill(255);
+  fill(whiteColor);
   ellipse(175,270,10,10) // eye white
-  fill(255,0,0);
+  fill(irisColor);
   ellipse(175,270,6,10); // red iris
   fill(0);
   ellipse(175,270,3,10); //black oval pupil
+
+
+
+
   //robo heart
   fill(155);
   rect(275,300,25,40);
@@ -142,6 +178,8 @@ function draw() {
 
 function drawWords(){
   text('Click to change color', 20,20);
+  text('Hover over each eye to close it', 20,40);
+
 }
 
 
@@ -154,4 +192,40 @@ function randomize(){
   r = random(255);
   g = random(255);
   b = random(255);
+}
+
+
+
+
+
+function update(x, y) {
+  if( overCircle(circleX, circleY, circleSize) ) {
+    circleOver = true;
+  } else {
+    circleOver = false;
+  }
+  if( overCircle1(circleX1, circleY1, circleSize) ) {
+    circleOver1 = true;
+  } else {
+    circleOver1 = false;
+  }
+
+  function overCircle(x, y, radius) {
+    const disX = x - mouseX;
+    const disY = y - mouseY;
+    if(sqrt(sq(disX) + sq(disY)) < radius ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  function overCircle1(x, y, radius) {
+    const disX = x - mouseX;
+    const disY = y - mouseY;
+    if(sqrt(sq(disX) + sq(disY)) < radius ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

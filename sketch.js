@@ -10,7 +10,8 @@ let circleOver1 = false;
 
 
 function setup() {
-  createCanvas(500, 500);
+  var myCanvas = createCanvas(400, 525);
+    myCanvas.parent("main_tings");
   strokeWeight(2);
   ellipseMode(RADIUS);
   randomize();

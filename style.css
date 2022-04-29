@@ -175,7 +175,7 @@
 }
 
 .story_object:nth-child(2) {                    /* nth-child selects the next object to change pic */
-  background-image: url("images/pic1.jpg");
+  background-image: url("images/pic3.jpg");
 }
 
 .story_object h2 {
